@@ -19,6 +19,8 @@ class Tweet(models.Model):
                                       blank=True,
                                       verbose_name=_("Created at"))
     screen_name = models.CharField(max_length=15,
+                                   null=True,
+                                   blank=True,
                                    verbose_name=_("User's @"))
     text = models.CharField(max_length=140,
                             verbose_name=_("Tweet"))
@@ -36,7 +38,9 @@ class ClassifiedTweet(models.Model):
                               verbose_name=_("Tweet"))
     user = models.ForeignKey(User,
                              on_delete=models.CASCADE,
-                             verbose_name=_("Tweet"))
+                             null=True,
+                             blank=True,
+                             verbose_name=_("User"))
     classified_at = models.DateTimeField(default=timezone.now,
                                          null=True,
                                          blank=True,
