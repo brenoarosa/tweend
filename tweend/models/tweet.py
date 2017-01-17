@@ -26,12 +26,16 @@ class Tweet(models.Model):
                             verbose_name=_("Tweet"))
     valid = models.BooleanField(default=True,
                                 verbose_name=_("Valid"))
-    displayed_count = models.IntegerField(default=0,
-                                          verbose_name=_("Displayed Count"))
 
     @property
     def report_count(self):
         return TweetReport.objetcs.filter(tweet=self).count()
+
+    @property
+    def displayed_count(self):
+        reports = TweetReport.objects.filter(tweet=self).count()
+        classifieds = ClassifiedTweets.objects.filter(tweet=self).count()
+        return reports + classifieds
 
 
 class ClassifiedTweet(models.Model):
