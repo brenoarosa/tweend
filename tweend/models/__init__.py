@@ -2,4 +2,4 @@
 Tweend models
 """
 
-from .tweet import Tweet, ClassifiedTweet #noqa
+from .tweet import Tweet, ClassifiedTweet, TweetReport #noqa

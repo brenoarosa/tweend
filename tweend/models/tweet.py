@@ -26,6 +26,12 @@ class Tweet(models.Model):
                             verbose_name=_("Tweet"))
     valid = models.BooleanField(default=True,
                                 verbose_name=_("Valid"))
+    displayed_count = models.IntegerField(default=0,
+                                          verbose_name=_("Displayed Count"))
+
+    @property
+    def report_count(self):
+        return TweetReport.objetcs.filter(tweet=self).count()
 
 
 class ClassifiedTweet(models.Model):
@@ -57,3 +63,21 @@ class ClassifiedTweet(models.Model):
 
     classification = models.IntegerField(choices=CLASS_CHOICES,
                                          verbose_name=_("Classification"))
+
+
+class TweetReport(models.Model):
+    """
+    Reports
+    """
+    tweet = models.ForeignKey(Tweet,
+                              on_delete=models.CASCADE,
+                              verbose_name=_("Tweet"))
+    user = models.ForeignKey(User,
+                             on_delete=models.CASCADE,
+                             null=True,
+                             blank=True,
+                             verbose_name=_("User"))
+    displayed_at = models.DateTimeField(default=timezone.now,
+                                        null=True,
+                                        blank=True,
+                                        verbose_name=_("Created at"))
