@@ -27,6 +27,9 @@ class Tweet(models.Model):
     valid = models.BooleanField(default=True,
                                 verbose_name=_("Valid"))
 
+    def __str__(self):
+        return "@{}: {}".format(self.screen_name, self.text)
+
     @property
     def report_count(self):
         return TweetReport.objetcs.filter(tweet=self).count()
@@ -68,6 +71,9 @@ class ClassifiedTweet(models.Model):
     classification = models.IntegerField(choices=CLASS_CHOICES,
                                          verbose_name=_("Classification"))
 
+    def __str__(self):
+        return "[{}] {}".format(self.classification, self.tweet)
+
 
 class TweetReport(models.Model):
     """
@@ -84,4 +90,7 @@ class TweetReport(models.Model):
     displayed_at = models.DateTimeField(default=timezone.now,
                                         null=True,
                                         blank=True,
-                                        verbose_name=_("Created at"))
+                                        verbose_name=_("Displayed at"))
+
+    def __str__(self):
+        return self.tweet
