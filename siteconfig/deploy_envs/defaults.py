@@ -54,8 +54,9 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'compressor',
     'django_extensions',
-    'tweend',
+    'rest_framework',
     'sekizai',
+    'tweend',
 ]
 
 MIDDLEWARE = [
@@ -239,3 +240,6 @@ LOGGING = {
 #########################
 # Plugins               #
 #########################
+
+# DJANGO REST FRAMEWORK
+REST_FRAMEWORK = {}

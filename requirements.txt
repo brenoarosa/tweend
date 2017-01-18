@@ -8,6 +8,7 @@ django-classy-tags==0.8.0
 django-compressor==2.1
 django-extensions==1.7.4
 django-sekizai==0.10.0
+djangorestframework==3.5.3
 ipython==5.1.0
 ipython-genutils==0.1.0
 isort==4.2.5
