@@ -2,9 +2,9 @@
 """
 
 from django.db.models import Count
-from tweend.settings import PATCH_LENGTH, MAX_CLASSIFICATION_COUNT, COUNT_TEMP
+from tweend.settings import BATCH_LENGTH, MAX_CLASSIFICATION_COUNT, COUNT_TEMP
 
-def build_patch(user, patch_len=PATCH_LENGTH):
+def build_batch(user, batch_len=BATCH_LENGTH):
     """
     """
 
@@ -28,5 +28,5 @@ def build_patch(user, patch_len=PATCH_LENGTH):
     # normalize p
     df["p"] = df["p"] / sum(df["p"])
 
-    selected_tweets = df.sample(n=PATCH_LENGTH, weights=df["p"])["tweet_id"]
+    selected_tweets = df.sample(n=BATCH_LENGTH, weights=df["p"])["tweet_id"]
     return Tweet.objects.filter(tweet_id__in=selected_tweets)

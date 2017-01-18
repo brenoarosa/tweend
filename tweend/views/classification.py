@@ -1,12 +1,12 @@
 """
-Tweet Patch Classification view
+Tweet Batch Classification view
 """
 
 from rest_framework import views, permissions, status
 from rest_framework.response import Response
 from tweend.models import Tweet, ClassifiedTweet
 from tweend.serializers import TweetSerializer, ClassifiedTweetSerializer
-from tweend.utils import build_patch
+from tweend.utils import build_batch
 
 
 class ClassificationAPIView(views.APIView):
@@ -15,7 +15,7 @@ class ClassificationAPIView(views.APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, format=None):
-        tweet_qs = build_patch(request.user)
+        tweet_qs = build_batch(request.user)
         serializer = TweetSerializer(tweet_qs, many=True)
         return Response(serializer.data)
 
